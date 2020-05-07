@@ -10,7 +10,18 @@ typedef long long ll;
 typedef unsigned long long ull;
 typedef pair <int, int> ii;
 
-#define maxn 100005
+#define maxn 1005
+
+struct help{
+  vector <int> path;
+  map <vector <int>, bool> used;
+  int len;
+  help(){}
+  help(vector <int> a){
+    path = a;
+    len = sz(a);
+  }
+};
 
 vector <int> g[maxn];
 int parent[maxn], lvl[maxn];
@@ -49,6 +60,19 @@ void dfs(int u, int p, int h){
   }
 }
 
+bool check(vector <int> &a, vector <int> &b){
+  if(sz(b) > sz(a)){
+    return false;
+  }
+  int j, i;
+  for(i = 0, j = 0; i < sz(a) and j < sz(b); i++){
+    if(a[i] == b[j]){
+      j++;
+    }
+  }
+  return (j == sz(b));
+}
+
 int main(){
   cin.tie(NULL);
   ios_base::sync_with_stdio(false);
@@ -63,12 +87,29 @@ int main(){
   dfs(1, 1, 1);
   int q;
   cin >> q;
-  vector <vector <int>> queries;
+  vector <help> queries;
   while(q--){
     int u, v;
     cin >> u >> v;
-    queries.push_back(lca(u, v));
+    queries.push_back(help(lca(u, v)));
   }
-  
+  for(int i = 0; i < sz(queries); i++){
+    for(int j = 0; j < sz(queries); j++){
+      if(i == j){
+        continue;
+      }
+      if(queries[i].used.count(queries[j].path) == 0){
+        if(check(queries[i].path, queries[j].path)){
+          queries[i].used[queries[j].path];
+          queries[i].len -= (sz(queries[j].path)-1);
+        }
+      }
+    }
+  }
+  int tot = 0;
+  for(auto i : queries){
+    tot += i.len;
+  }
+  cout << tot << "\n";
   return 0;
 }
