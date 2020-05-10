@@ -25,7 +25,7 @@ long long int combine(long long int a, long long int b){
 
 void build(int i, int l, int r){
   if(l == r){
-    segtree[i] |= (1LL<<inhld[posarr[l]]);
+    segtree[i] |= (1LL<<inhld[l]);
     return;
   }
   int md = (l+r)/2, nxt = 2*i;
