@@ -47,6 +47,7 @@ int main(){
       cnt++;
     }
     if(lastmsg[users[s]]+k <= w){
+      lastmsg[users[s]] = w;
       robot[users[s]].add();
     }
   }
@@ -56,7 +57,7 @@ int main(){
     }
     return a.xp > b.xp;
   });
-  if(sz(robot) < 3){
+  while(sz(robot) < 3){
     robot.push_back(user(""));
   }
   cout << "--Rank do Nepscord--\n";
