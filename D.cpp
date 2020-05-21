@@ -119,8 +119,8 @@ int main(){
   for(int i = 0; i < q; i++){
     ans += sz(queries[i]);
     int N = sz(in[i]);
-     int dp[N+1] = {0};
-     for(int _i = N-1; _i >= 0; _i--){
+    int dp[N+1] = {0};
+    for(int _i = N-1; _i >= 0; _i--){
       int l, r;
       tie(ignore, l, r) = in[i][_i];
       int rg = r-l;
