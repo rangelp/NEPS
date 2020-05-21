@@ -2,11 +2,19 @@
 
 using namespace std;
 
-#define aint(x) x.begin(), x.end()
+#define all(x) x.begin(), x.end()
 #define sz(x) (int) x.size()
-#define debug(x) cout << "DEBUG: " << x << endl;
+#define debug(args...){string _s = #args; replace(_s.begin(), _s.end(), ',', ' '); stringstream _ss(_s); istream_iterator<string> _it(_ss); err(_it, args);}
+#define endl "\n"
 
-typedef long long int ll;
+void err(istream_iterator<string> it){}
+template<typename T, typename... Args>
+void err(istream_iterator<string> it, T a, Args... args){
+	cerr << *it << " = " << a << endl;
+	err(++it, args...);
+}
+
+typedef long long ll;
 typedef unsigned long long ull;
 typedef pair <int, int> ii;
 
@@ -106,7 +114,6 @@ int main(){
       if(id != y){
         R = query(1, 0, n-1, id+1, y).or_seq;
       }
-      //L = query(1, 0, n-1, x, id-1).or_seq, R = query(1, 0, n-1, id+1, y).or_seq;
       ll OR = L|R;
       cout << (OR == arr[id] ? arr[id] : -1) << "\n";
     }
@@ -119,7 +126,6 @@ int main(){
       if(id != y){
         R = query(1, 0, n-1, id+1, y).and_seq;
       }
-      //L = query(1, 0, n-1, x, id-1).and_seq, R = query(1, 0, n-1, id+1, y).and_seq;
       ll AND = L&R;
       cout << (AND == arr[id] ? arr[id] : -1) << "\n";
     }
