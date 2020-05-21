@@ -4,7 +4,15 @@ using namespace std;
 
 #define all(x) x.begin(), x.end()
 #define sz(x) (int) x.size()
-#define debug(x) cout << "DEBUG: " << x << endl;
+#define debug(args...){string _s = #args; replace(_s.begin(), _s.end(), ',', ' '); stringstream _ss(_s); istream_iterator<string> _it(_ss); err(_it, args);}
+#define endl "\n"
+
+void err(istream_iterator<string> it){}
+template<typename T, typename... Args>
+void err(istream_iterator<string> it, T a, Args... args){
+	cerr << *it << " = " << a << endl;
+	err(++it, args...);
+}
 
 typedef long long ll;
 typedef unsigned long long ull;
@@ -202,8 +210,8 @@ int main(){
     int u, v;
     cin >> u >> v;
     u--, v--;
-    g[u].push_back(v);
-    g[v].push_back(u);
+    g[u].emplace_back(v);
+    g[v].emplace_back(u);
   }
   memset(dp, -1, sizeof dp);
   memset(head, -1, sizeof  head);
@@ -226,7 +234,7 @@ int main(){
       int u, v;
       cin >> u >> v;
       u--, v--;
-      cout <<  __builtin_popcountll(solveQuery(u, v, lca(u, v))) << "\n";
+      cout <<  __builtin_popcountll(solveQuery(u, v, lca(u, v))) << endl;
     }
   }
   return 0;
