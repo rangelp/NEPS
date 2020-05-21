@@ -68,14 +68,14 @@ int main(){
   while(sz(robot) < 3){
     robot.emplace_back(user(""));
   }
-  cout << "--Rank do Nepscord--\n";
+  cout << "--Rank do Nepscord--" << endl;
   for(int i = 0; i < 3; i++){
     cout << "#" << i+1 << ".";
     if(robot[i].name == ""){
-      cout << "\n";
+      cout << endl;
     }
     else{
-      cout << " " << robot[i].name << " - Nivel " << robot[i].lvl << "\n";
+      cout << " " << robot[i].name << " - Nivel " << robot[i].lvl << endl;
     }
   }
   return 0;
