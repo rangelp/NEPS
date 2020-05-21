@@ -4,7 +4,15 @@ using namespace std;
 
 #define all(x) x.begin(), x.end()
 #define sz(x) (int) x.size()
-#define debug(x) cout << "DEBUG: " << x << endl;
+#define debug(args...){string _s = #args; replace(_s.begin(), _s.end(), ',', ' '); stringstream _ss(_s); istream_iterator<string> _it(_ss); err(_it, args);}
+#define endl "\n"
+
+void err(istream_iterator<string> it){}
+template<typename T, typename... Args>
+void err(istream_iterator<string> it, T a, Args... args){
+	cerr << *it << " = " << a << endl;
+	err(++it, args...);
+}
 
 typedef long long ll;
 typedef unsigned long long ull;
@@ -42,8 +50,8 @@ int main(){
     cin >> s >> w;
     if(users.count(s) == 0){
       users[s] = cnt;
-      robot.push_back(user(s));
-      lastmsg.push_back(w);
+      robot.emplace_back(user(s));
+      lastmsg.emplace_back(w);
       cnt++;
     }
     if(lastmsg[users[s]]+k <= w){
@@ -58,7 +66,7 @@ int main(){
     return a.xp > b.xp;
   });
   while(sz(robot) < 3){
-    robot.push_back(user(""));
+    robot.emplace_back(user(""));
   }
   cout << "--Rank do Nepscord--\n";
   for(int i = 0; i < 3; i++){
